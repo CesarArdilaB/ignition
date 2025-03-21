@@ -1,5 +1,5 @@
-import { json, type ActionFunctionArgs } from "@remix-run/node";
-import { Form, Link, useActionData, useNavigation } from "@remix-run/react";
+import { json, redirect, type ActionFunctionArgs, type LoaderFunctionArgs } from "@remix-run/node";
+import { Form, Link, useActionData, useNavigation, useSearchParams } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
@@ -15,27 +15,32 @@ import { auth } from "auth";
 
 interface ActionData {
   success: boolean;
-  session?: {
-    redirect: boolean;
-    token: string;
-    url?: string;
-    user: {
-      id: string;
-      email: string;
-      name: string;
-      image?: string | null;
-      emailVerified: boolean;
-      createdAt: Date;
-      updatedAt: Date;
-    };
-  };
   error?: string;
+}
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const session = await auth.api.getSession({
+    headers: request.headers,
+  });
+
+  // If user is already logged in, redirect them
+  if (session?.user) {
+    // Get the return URL from the search params or default to dashboard
+    const url = new URL(request.url);
+    const returnTo = url.searchParams.get("returnTo") || "/dashboard";
+    return redirect(returnTo);
+  }
+
+  return json({});
 }
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
+
+  // Get the return URL from the form data
+  const returnTo = formData.get("returnTo") as string || "/dashboard";
 
   try {
     const result = await auth.api.signInEmail({
@@ -44,7 +49,16 @@ export async function action({ request }: ActionFunctionArgs) {
         password,
       },
     });
-    return json<ActionData>({ success: true, session: result });
+
+    if (result.token) {
+      return redirect(returnTo);
+    }
+
+    return json<ActionData>({ 
+      success: false,
+      error: "Failed to create session" 
+    }, { status: 400 });
+
   } catch (error) {
     if (error instanceof Error) {
       return json<ActionData>(
@@ -63,6 +77,8 @@ export default function Login() {
   const actionData = useActionData<typeof action>();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+  const [searchParams] = useSearchParams();
+  const returnTo = searchParams.get("returnTo") || "/dashboard";
 
   return (
     <div className="container max-w-md mx-auto px-4 py-16">
@@ -73,6 +89,7 @@ export default function Login() {
         </CardHeader>
         <CardContent>
           <Form method="post" className="space-y-4">
+            <input type="hidden" name="returnTo" value={returnTo} />
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -105,7 +122,9 @@ export default function Login() {
           <p className="text-sm text-muted-foreground">
             Don't have an account?{" "}
             <Button variant="link" asChild className="p-0">
-              <Link to="/auth/register">Sign up</Link>
+              <Link to={`/auth/register?returnTo=${encodeURIComponent(returnTo)}`}>
+                Sign up
+              </Link>
             </Button>
           </p>
         </CardFooter>
