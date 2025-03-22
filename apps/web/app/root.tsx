@@ -7,8 +7,11 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { json, type LinksFunction, type LoaderFunctionArgs } from "@remix-run/node";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { auth } from "auth";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { httpBatchLink } from "@trpc/react-query";
+import { trpc } from "./lib/trpc/client";
 
 import "./tailwind.css";
 
@@ -85,10 +88,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   const { user } = useLoaderData<typeof loader>();
+  const [queryClient] = useState(() => new QueryClient());
+  const [trpcClient] = useState(() =>
+    trpc.createClient({
+      links: [
+        httpBatchLink({
+          url: '/api/trpc',
+        }),
+      ],
+    })
+  );
 
   return (
-    <AuthContext.Provider value={{ user }}>
-      <Outlet />
-    </AuthContext.Provider>
+    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <AuthContext.Provider value={{ user }}>
+          <Outlet />
+        </AuthContext.Provider>
+      </QueryClientProvider>
+    </trpc.Provider>
   );
 }
