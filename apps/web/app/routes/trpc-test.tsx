@@ -1,8 +1,8 @@
 import { trpc } from "~/lib/trpc/client";
+import type { Category } from "database";
 
 export default function TrpcTest() {
-  const hello = trpc.hello.useQuery();
-  const echo = trpc.echo.useQuery({ text: "Testing tRPC!" });
+  const categories = trpc.catalog.getCategories.useQuery();
 
   return (
     <div className="p-8">
@@ -10,24 +10,19 @@ export default function TrpcTest() {
       
       <div className="space-y-4">
         <div>
-          <h2 className="text-xl font-semibold mb-2">Hello Query:</h2>
-          {hello.isLoading ? (
+          <h2 className="text-xl font-semibold mb-2">Categories:</h2>
+          {categories.isLoading ? (
             <p>Loading...</p>
-          ) : hello.error ? (
-            <p className="text-red-500">Error: {hello.error.message}</p>
+          ) : categories.error ? (
+            <p className="text-red-500">Error: {categories.error.message}</p>
           ) : (
-            <p className="text-green-600">{hello.data?.greeting}</p>
-          )}
-        </div>
-
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Echo Query:</h2>
-          {echo.isLoading ? (
-            <p>Loading...</p>
-          ) : echo.error ? (
-            <p className="text-red-500">Error: {echo.error.message}</p>
-          ) : (
-            <p className="text-green-600">{echo.data?.message}</p>
+            <ul className="list-disc pl-5">
+              {categories.data?.map((category: Category) => (
+                <li key={category.id}>
+                  {category.name} - {category.description}
+                </li>
+              ))}
+            </ul>
           )}
         </div>
       </div>

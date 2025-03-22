@@ -1,5 +1,6 @@
 import { sql } from 'drizzle-orm';
 import { sqliteTable, text, integer, real } from 'drizzle-orm/sqlite-core';
+import { relations } from 'drizzle-orm';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import type { z } from 'zod';
 
@@ -30,6 +31,26 @@ export const variants = sqliteTable('variants', {
   stockQuantity: integer('stock_quantity').notNull().default(0),
   createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(sql`CURRENT_TIMESTAMP`),
 });
+
+// Relations
+export const categoriesRelations = relations(categories, ({ many }) => ({
+  products: many(products),
+}));
+
+export const productsRelations = relations(products, ({ one, many }) => ({
+  category: one(categories, {
+    fields: [products.categoryId],
+    references: [categories.id],
+  }),
+  variants: many(variants),
+}));
+
+export const variantsRelations = relations(variants, ({ one }) => ({
+  product: one(products, {
+    fields: [variants.productId],
+    references: [products.id],
+  }),
+}));
 
 // Schemas for validation
 export const insertCategorySchema = createInsertSchema(categories);

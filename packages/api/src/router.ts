@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { router, publicProcedure } from './trpc';
+import { catalogRouter } from './routes/catalog';
 
 export const appRouter = router({
   hello: publicProcedure
@@ -16,6 +17,8 @@ export const appRouter = router({
         message: `You said: ${input.text}`,
       };
     }),
+
+  catalog: catalogRouter,
 });
 
 export type AppRouter = typeof appRouter; 

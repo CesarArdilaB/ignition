@@ -9,7 +9,11 @@
       "forceConsistentCasingInFileNames": true,
       "resolveJsonModule": true,
       "allowSyntheticDefaultImports": true,
-      "baseUrl": "."
+      "baseUrl": ".",
+      "paths": {
+        "database": ["../database/src"],
+        "database/*": ["../database/src/*"]
+      }
     },
     "include": ["src"]
   }
