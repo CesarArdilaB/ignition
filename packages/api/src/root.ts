@@ -1,7 +1,10 @@
-import { publicProcedure, router } from './trpc';
+import { router } from './trpc';
+import { catalogRouter } from './routes/catalog';
+import { aiRouter } from './routes/ai';
 
 export const appRouter = router({
-  ping: publicProcedure.query(() => 'pong'),
+  catalog: catalogRouter,
+  ai: aiRouter,
 });
 
 export type AppRouter = typeof appRouter;

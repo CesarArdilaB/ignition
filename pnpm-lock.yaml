@@ -132,6 +132,9 @@ importers:
       '@trpc/server':
         specifier: ^10.45.2
         version: 10.45.2
+      ai:
+        specifier: workspace:*
+        version: link:../../packages/ai
       api:
         specifier: workspace:*
         version: link:../../packages/api
@@ -251,6 +254,9 @@ importers:
       '@trpc/server':
         specifier: ^10.45.2
         version: 10.45.2
+      ai:
+        specifier: workspace:*
+        version: link:../ai
       better-sqlite3:
         specifier: ^11.9.1
         version: 11.9.1

@@ -27,7 +27,9 @@
       "auth": ["../../packages/auth/src"],
       "auth/*": ["../../packages/auth/src/*"],
       "database": ["../../packages/database/src"],
-      "database/*": ["../../packages/database/src/*"]
+      "database/*": ["../../packages/database/src/*"],
+      "ai": ["../../packages/ai/src"],
+      "ai/*": ["../../packages/ai/src/*"]
     },
 
     // Vite takes care of building everything, not tsc.

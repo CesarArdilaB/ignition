@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@trpc/server": "^10.45.2",
+    "ai": "workspace:*",
     "better-sqlite3": "^11.9.1",
     "drizzle-orm": "0.41.0",
     "zod": "^3.22.4"

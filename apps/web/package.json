@@ -61,7 +61,8 @@
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "ai": "workspace:*"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.16.1",

@@ -12,7 +12,9 @@
       "baseUrl": ".",
       "paths": {
         "database": ["../database/src"],
-        "database/*": ["../database/src/*"]
+        "database/*": ["../database/src/*"],
+        "ai": ["../ai/src"],
+        "ai/*": ["../ai/src/*"]
       }
     },
     "include": ["src"]
