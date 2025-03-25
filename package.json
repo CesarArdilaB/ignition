@@ -20,10 +20,11 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@types/better-sqlite3": "^7.6.12",
-    "turbo": "^2.4.4",
-    "typescript": "5.8.2",
+    "@types/node": "^22.13.13",
     "@vitest/coverage-v8": "^3.0.9",
     "@vitest/ui": "^3.0.9",
+    "turbo": "^2.4.4",
+    "typescript": "5.8.2",
     "vitest": "^3.0.9"
   },
   "packageManager": "pnpm@9.0.0",
