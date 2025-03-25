@@ -1,15 +1,14 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vitest/config';
+import { defineProject, mergeConfig } from 'vitest/config';
+import configShared from '../../vitest.shared';
 
-export default defineConfig({
-  test: {
-    globals: true,
-    environment: 'node',
-    include: ['__tests__/**/*.{test,spec}.{js,ts}'],
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html'],
-    },
-    setupFiles: ['__tests__/setup.ts'],
-  },
-}); 
+export default mergeConfig(
+  configShared,
+  defineProject({
+    test: {
+      name: 'auth',
+      setupFiles: ['__tests__/setup.ts'],
+      include: ['__tests__/**/*.{test,spec}.{js,ts}']
+    }
+  })
+); 

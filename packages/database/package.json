@@ -28,7 +28,7 @@
     "drizzle-kit": "^0.19.13",
     "tsx": "^4.7.1",
     "typescript": "^5.8.2",
-    "@vitest/ui": "^3.0.9",
-    "vitest": "^3.0.9"
+    "@vitest/ui": "^1.4.0",
+    "vitest": "^1.4.0"
   }
 }
