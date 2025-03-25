@@ -8,18 +8,24 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@trpc/server": "^10.45.2",
     "ai": "workspace:*",
     "better-sqlite3": "^11.9.1",
+    "database": "workspace:*",
     "drizzle-orm": "0.41.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "tsx": "^4.7.1",
     "@types/better-sqlite3": "^7.6.9",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.2",
+    "vitest": "^3.0.9",
+    "@vitest/ui": "^3.0.9"
   }
 }

@@ -8,25 +8,25 @@ export const catalogRouter = router({
   // Queries
   getCategories: publicProcedure
     .query(async () => {
-      return await db.select().from(schema.categories);
+      return await db.select().from(schema.categories).execute();
     }),
 
   getProductsByCategory: publicProcedure
     .input(z.string())
     .query(async ({ input }) => {
-      return await db.select().from(schema.products).where(eq(schema.products.categoryId, input));
+      return await db.select().from(schema.products).where(eq(schema.products.categoryId, input)).execute();
     }),
 
   getProductWithVariants: publicProcedure
     .input(z.string())
     .query(async ({ input }) => {
-      const product = await db.select().from(schema.products).where(eq(schema.products.id, input)).limit(1);
+      const product = await db.select().from(schema.products).where(eq(schema.products.id, input)).limit(1).execute();
 
       if (!product.length) {
         throw new Error('Product not found');
       }
 
-      const variants = await db.select().from(schema.variants).where(eq(schema.variants.productId, input));
+      const variants = await db.select().from(schema.variants).where(eq(schema.variants.productId, input)).execute();
 
       return {
         ...product[0],

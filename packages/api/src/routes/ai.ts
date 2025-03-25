@@ -43,7 +43,7 @@ export const aiRouter = router({
     .input(z.object({
       provider: ProviderSchema,
       model: z.string(),
-      messages: z.array(MessageSchema),
+      messages: z.array(MessageSchema).min(1, 'At least one message is required'),
       temperature: z.number().min(0).max(2).optional(),
       maxTokens: z.number().optional(),
       topP: z.number().min(0).max(1).optional(),
