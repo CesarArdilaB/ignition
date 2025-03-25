@@ -1,84 +1,100 @@
-# Turborepo starter
+# Ignition - Modern Full-Stack Starter Kit
 
-This Turborepo starter is maintained by the Turborepo core team.
+A production-ready full-stack starter kit with modern technologies and a beautiful UI. Build your next project in minutes, not hours.
 
-## Using this example
+![Ignition](https://img.shields.io/badge/Ignition-Modern%20Full%20Stack-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-Run the following command:
+## 🚀 Features
 
-```sh
-npx create-turbo@latest
-```
+- **Type-Safe API Layer**: End-to-end type safety with tRPC
+- **Authentication**: Secure auth with email/password and social providers
+- **Database**: Type-safe operations with Drizzle ORM
+- **Modern UI**: Beautiful components with Shadcn/ui
+- **AI Ready**: Pre-configured AI handlers and integrations
+- **Developer Experience**: Hot reload, TypeScript, ESLint, and Prettier configured
 
-## What's inside?
+## 🛠️ Tech Stack
 
-This Turborepo includes the following packages/apps:
+- **Frontend**: Remix, React, TypeScript, Tailwind CSS
+- **Backend**: tRPC, Node.js
+- **Database**: Drizzle ORM, SQLite
+- **Authentication**: Better Auth
+- **UI Components**: Shadcn/ui
+- **AI Integration**: OpenAI, Anthropic
+- **Testing**: Vitest
+- **Package Manager**: pnpm
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+## 📦 Project Structure
 
 ```
-cd my-turborepo
-pnpm build
+ignition/
+├── apps/
+│   └── web/                 # Remix web application
+├── packages/
+│   ├── ai/                  # AI integration package
+│   ├── api/                 # API routes and handlers
+│   ├── auth/                # Authentication package
+│   ├── auth-db/             # Auth database package
+│   ├── database/            # Database package
+│   └── typescript-config/   # Shared TypeScript config
+└── package.json
 ```
 
-### Develop
+## 🚀 Getting Started
 
-To develop all apps and packages, run the following command:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/ignition.git
+   cd ignition
+   ```
 
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   ```
+   Edit `.env` with your configuration.
+
+4. **Start the development server**
+   ```bash
+   pnpm dev
+   ```
+
+5. **Open your browser**
+   Visit `http://localhost:3000`
+
+## 🧪 Testing
+
+Run tests across all packages:
+```bash
+pnpm test
 ```
-cd my-turborepo
-pnpm dev
-```
 
-### Remote Caching
+## 📚 Documentation
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+- [Getting Started Guide](docs/getting-started.md)
+- [Architecture Overview](docs/architecture.md)
+- [API Documentation](docs/api.md)
+- [Contributing Guide](CONTRIBUTING.md)
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+## 🤝 Contributing
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-```
-cd my-turborepo
-npx turbo login
-```
+## 📄 License
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## 🙏 Acknowledgments
 
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+- [Remix](https://remix.run)
+- [tRPC](https://trpc.io)
+- [Drizzle ORM](https://orm.drizzle.team)
+- [Shadcn/ui](https://ui.shadcn.com)
+- [Better Auth](https://github.com/your-username/better-auth)
