@@ -3,6 +3,7 @@ import { Form, Link, useActionData, useNavigation, useSearchParams } from "@remi
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
+import { Checkbox } from "~/components/ui/checkbox";
 import {
   Card,
   CardContent,
@@ -12,6 +13,8 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { auth } from "auth";
+import { Alert, AlertDescription } from "~/components/ui/alert";
+import { Loader2 } from "lucide-react";
 
 interface ActionData {
   success: boolean;
@@ -38,9 +41,16 @@ export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-
-  // Get the return URL from the form data
+  const rememberMe = formData.get("rememberMe") === "on";
   const returnTo = formData.get("returnTo") as string || "/dashboard";
+
+  // Basic validation
+  if (!email || !password) {
+    return json<ActionData>(
+      { success: false, error: "Email and password are required" },
+      { status: 400 }
+    );
+  }
 
   try {
     const result = await auth.api.signInEmail({
@@ -51,13 +61,18 @@ export async function action({ request }: ActionFunctionArgs) {
     });
 
     if (result.token) {
+      // Set remember me cookie if requested
+      if (rememberMe) {
+        // You can implement remember me logic here
+        // This might involve setting a longer-lived cookie
+      }
       return redirect(returnTo);
     }
 
-    return json<ActionData>({ 
-      success: false,
-      error: "Failed to create session" 
-    }, { status: 400 });
+    return json<ActionData>(
+      { success: false, error: "Invalid email or password" },
+      { status: 400 }
+    );
 
   } catch (error) {
     if (error instanceof Error) {
@@ -98,6 +113,8 @@ export default function Login() {
                 type="email"
                 autoComplete="email"
                 required
+                placeholder="Enter your email"
+                disabled={isSubmitting}
               />
             </div>
             <div className="space-y-2">
@@ -108,25 +125,49 @@ export default function Login() {
                 type="password"
                 autoComplete="current-password"
                 required
+                placeholder="Enter your password"
+                disabled={isSubmitting}
               />
             </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox id="rememberMe" name="rememberMe" disabled={isSubmitting} />
+              <Label htmlFor="rememberMe" className="text-sm font-normal">
+                Remember me
+              </Label>
+            </div>
             {actionData?.error && (
-              <div className="text-sm text-red-500">{actionData.error}</div>
+              <Alert variant="destructive">
+                <AlertDescription>{actionData.error}</AlertDescription>
+              </Alert>
             )}
             <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? "Signing in..." : "Sign in"}
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Signing in...
+                </>
+              ) : (
+                "Sign in"
+              )}
             </Button>
           </Form>
         </CardContent>
-        <CardFooter className="flex justify-center">
-          <p className="text-sm text-muted-foreground">
-            Don't have an account?{" "}
-            <Button variant="link" asChild className="p-0">
-              <Link to={`/auth/register?returnTo=${encodeURIComponent(returnTo)}`}>
-                Sign up
-              </Link>
+        <CardFooter className="flex flex-col space-y-4">
+          <div className="flex justify-center">
+            <p className="text-sm text-muted-foreground">
+              Don't have an account?{" "}
+              <Button variant="link" asChild className="p-0">
+                <Link to={`/auth/register?returnTo=${encodeURIComponent(returnTo)}`}>
+                  Sign up
+                </Link>
+              </Button>
+            </p>
+          </div>
+          <div className="flex justify-center">
+            <Button variant="link" asChild className="p-0 text-sm">
+              <Link to="/auth/forgot-password">Forgot your password?</Link>
             </Button>
-          </p>
+          </div>
         </CardFooter>
       </Card>
     </div>
