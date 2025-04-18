@@ -1,5 +1,4 @@
 import {
-	json,
 	redirect,
 	type ActionFunctionArgs,
 	type LoaderFunctionArgs,
@@ -27,6 +26,7 @@ import { auth } from "auth";
 import { Alert, AlertDescription } from "~/components/ui/alert";
 import { Loader2, Mail, Lock } from "lucide-react";
 import { APP_DESCRIPTION, APP_NAME, COMPANY_NAME } from "~/lib/constants";
+import { jsonResponse } from "~/lib/utils";
 
 interface ActionData {
 	success: boolean;
@@ -46,7 +46,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 		return redirect(returnTo);
 	}
 
-	return json({});
+	return jsonResponse({});
 }
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -58,7 +58,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
 	// Basic validation
 	if (!email || !password) {
-		return json<ActionData>(
+		return jsonResponse<ActionData>(
 			{ success: false, error: "Email and password are required" },
 			{ status: 400 },
 		);
@@ -81,18 +81,18 @@ export async function action({ request }: ActionFunctionArgs) {
 			return redirect(returnTo);
 		}
 
-		return json<ActionData>(
+		return jsonResponse<ActionData>(
 			{ success: false, error: "Invalid email or password" },
 			{ status: 400 },
 		);
 	} catch (error) {
 		if (error instanceof Error) {
-			return json<ActionData>(
+			return jsonResponse<ActionData>(
 				{ success: false, error: error.message },
 				{ status: 400 },
 			);
 		}
-		return json<ActionData>(
+		return jsonResponse<ActionData>(
 			{ success: false, error: "An unexpected error occurred" },
 			{ status: 500 },
 		);

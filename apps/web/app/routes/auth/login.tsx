@@ -1,5 +1,5 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
-import { Form, Link, useNavigation } from "@remix-run/react";
+import { type FormEvent, useState } from "react";
+import { Link, useNavigate } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
@@ -11,21 +11,35 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-
-export async function action({ request }: ActionFunctionArgs) {
-  const formData = await request.formData();
-  const email = formData.get("email");
-  const password = formData.get("password");
-
-  // TODO: Implement authentication
-  console.log("Login attempt:", { email, password });
-
-  return null;
-}
+import { trpc } from "~/lib/trpc/client";
 
 export default function Login() {
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
+  const navigate = useNavigate();
+  const [error, setError] = useState<string | null>(null);
+
+  const loginMutation = trpc.auth.login.useMutation({
+    onSuccess: () => {
+      navigate("/dashboard");
+    },
+    onError: (error) => {
+      setError(error.message);
+    },
+  });
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError(null);
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    if (!email || !password) {
+      setError("Email and password are required.");
+      return;
+    }
+
+    loginMutation.mutate({ email, password });
+  };
 
   return (
     <div className="container max-w-md mx-auto px-4 py-16">
@@ -35,7 +49,7 @@ export default function Login() {
           <CardDescription>Sign in to your account</CardDescription>
         </CardHeader>
         <CardContent>
-          <Form method="post" className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -44,6 +58,7 @@ export default function Login() {
                 type="email"
                 autoComplete="email"
                 required
+                disabled={loginMutation.isLoading}
               />
             </div>
             <div className="space-y-2">
@@ -54,12 +69,16 @@ export default function Login() {
                 type="password"
                 autoComplete="current-password"
                 required
+                disabled={loginMutation.isLoading}
               />
             </div>
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? "Signing in..." : "Sign in"}
+            {error && (
+              <p className="text-sm text-red-500">{error}</p>
+            )}
+            <Button type="submit" className="w-full" disabled={loginMutation.isLoading}>
+              {loginMutation.isLoading ? "Signing in..." : "Sign in"}
             </Button>
-          </Form>
+          </form>
         </CardContent>
         <CardFooter className="flex justify-center">
           <p className="text-sm text-muted-foreground">

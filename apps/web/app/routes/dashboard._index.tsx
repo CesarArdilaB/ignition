@@ -1,10 +1,11 @@
-import { protectedLoader } from "~/components/auth/protected-route";
+// import { protectedLoader } from "~/components/auth/protected-route";
 import { ProtectedRoute } from "~/components/auth/protected-route";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
 import { Plus } from "lucide-react";
 
-export { protectedLoader as loader };
+// Remove loader export
+// export { protectedLoader as loader };
 
 export default function Dashboard() {
   return (
