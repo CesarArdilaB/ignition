@@ -1,0 +1,9 @@
+---
+description: For every agent request
+globs: 
+alwaysApply: false
+---
+
+# Your rule content
+
+- Explain you plan and whait for confirmation
