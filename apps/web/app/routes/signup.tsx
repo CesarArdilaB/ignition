@@ -127,7 +127,7 @@ export default function Register() {
 					<p className="text-sm text-muted-foreground">
 						Already have an account?{" "}
 						<Button variant="link" asChild className="p-0">
-							<Link to={`/auth/login?returnTo=${encodeURIComponent(returnTo)}`}>
+							<Link to={`/login?returnTo=${encodeURIComponent(returnTo)}`}>
 								Sign in
 							</Link>
 						</Button>

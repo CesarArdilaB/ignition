@@ -84,7 +84,7 @@ export default function Login() {
           <p className="text-sm text-muted-foreground">
             Don't have an account?{" "}
             <Button variant="link" asChild className="p-0">
-              <Link to="/auth/register">Sign up</Link>
+              <Link to="/signup">Sign up</Link>
             </Button>
           </p>
         </CardFooter>

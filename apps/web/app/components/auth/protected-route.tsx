@@ -18,7 +18,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
 		// Redirect if not loading, and there is no user
 		if (!isLoading && !sessionData?.user) {
 			const returnTo = encodeURIComponent(location.pathname + location.search);
-			navigate(`/auth/login?returnTo=${returnTo}`, { replace: true });
+			navigate(`/login?returnTo=${returnTo}`, { replace: true });
 		}
 	}, [isLoading, sessionData, navigate, location]);
 

@@ -47,7 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 function AppContent() {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const isAuthPage = location.pathname.startsWith("/auth");
+	const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
 
 	const { data: sessionData, isLoading: isSessionLoading } = trpc.auth.getCurrentSession.useQuery(
 		undefined,
@@ -61,7 +61,7 @@ function AppContent() {
 	const logoutMutation = trpc.auth.logout.useMutation({
 		onSuccess: () => {
 			trpc.auth.getCurrentSession.useQuery().refetch();
-			navigate("/auth/login");
+			navigate("/login");
 		},
 		onError: (error) => {
 			console.error("Logout failed:", error);
