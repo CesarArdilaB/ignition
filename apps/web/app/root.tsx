@@ -91,10 +91,10 @@ function AppContent() {
 								{user && !isSessionLoading && (
 									<nav className="flex gap-4">
 										<a
-											href="/dashboard"
+											href="/app"
 											className="text-sm text-muted-foreground hover:text-foreground"
 										>
-											Dashboard
+											App Home
 										</a>
 										<a
 											href="/memos"

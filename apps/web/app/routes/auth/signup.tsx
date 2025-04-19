@@ -28,7 +28,7 @@ export default function Register() {
 
 	const registerMutation = trpc.auth.register.useMutation({
 		onSuccess: () => {
-			navigate(returnTo);
+			navigate(returnTo === "/dashboard" ? "/app" : returnTo);
 		},
 		onError: (error) => {
 			setError(error.message);
