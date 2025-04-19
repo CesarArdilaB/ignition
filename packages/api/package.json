@@ -19,6 +19,7 @@
     "auth": "workspace:*",
     "better-sqlite3": "^11.9.1",
     "database": "workspace:*",
+    "dotenv": "^16.4.5",
     "drizzle-orm": "0.41.0",
     "zod": "^3.22.4"
   },
