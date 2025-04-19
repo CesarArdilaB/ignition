@@ -16,7 +16,7 @@
     "auth-db": "workspace:*",
     "better-auth": "^1.2.4",
     "dotenv": "^16.4.5",
-    "drizzle-orm": "^0.30.4"
+    "drizzle-orm": "0.41.0"
   },
   "devDependencies": {
     "@vitest/ui": "^3.0.9",

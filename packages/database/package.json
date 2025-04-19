@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@types/pg": "^8.11.11",
-    "drizzle-kit": "^0.19.13",
+    "drizzle-kit": "latest",
     "tsx": "^4.7.1",
     "typescript": "^5.8.2",
     "@vitest/ui": "^1.4.0",
