@@ -1,5 +1,7 @@
 import { Link } from "@remix-run/react";
 import { APP_NAME } from "~/lib/constants";
+import { ThemeToggle } from "./ThemeToggle";
+
 export function PublicHeader() { // Renamed from LandingHeader
   return (
     <header className="bg-background sticky top-0 z-50 w-full border-b border-border/40 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -28,7 +30,7 @@ export function PublicHeader() { // Renamed from LandingHeader
           </nav>
         </div>
         <div className="flex items-center space-x-2">
-          {/* TODO: Consider adding a Signup button */}
+          <ThemeToggle />
           <Link
             to="/login"
             className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background hover:bg-accent hover:text-accent-foreground h-9 px-3"

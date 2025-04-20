@@ -9,6 +9,7 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { trpc, useTrpcClient } from "./lib/trpc/client";
+import { ThemeProvider } from "next-themes";
 
 import "./tailwind.css";
 
@@ -31,7 +32,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<trpc.Provider client={trpcClient} queryClient={queryClient}>
 			<QueryClientProvider client={queryClient}>
-				<html lang="en" className="h-full">
+				<html lang="en" className="h-full" suppressHydrationWarning>
 					<head>
 						<meta charSet="utf-8" />
 						<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,7 +40,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 						<Links />
 					</head>
 					<body className="h-full">
-						{children}
+						<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+							{children}
+						</ThemeProvider>
 						<ScrollRestoration />
 						<Scripts />
 					</body>
