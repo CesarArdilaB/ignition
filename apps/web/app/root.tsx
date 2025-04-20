@@ -11,7 +11,6 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { trpc, useTrpcClient } from "./lib/trpc/client";
 
 import "./tailwind.css";
-import { APP_NAME } from "./lib/constants";
 
 export const links: LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
