@@ -15,6 +15,20 @@
       "when": 1745112090879,
       "tag": "0001_luxuriant_sabretooth",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1745112223013,
+      "tag": "0002_massive_sumo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1745112520151,
+      "tag": "0003_broad_scourge",
+      "breakpoints": true
     }
   ]
 }

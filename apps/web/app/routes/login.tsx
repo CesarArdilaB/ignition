@@ -19,7 +19,7 @@ export default function Login() {
 
   const loginMutation = trpc.auth.login.useMutation({
     onSuccess: () => {
-      navigate("/app");
+      navigate("/");
     },
     onError: (error) => {
       setError(error.message);
