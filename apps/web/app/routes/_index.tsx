@@ -27,7 +27,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 function LandingPageContent() {
 	return (
-		<div className="container py-12">
+		<div className="container mx-auto py-12">
 			<div className="text-center mb-12">
 				<h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl mb-4">
 					Track easy with {APP_NAME}
