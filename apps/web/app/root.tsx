@@ -5,11 +5,16 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { trpc, useTrpcClient } from "./lib/trpc/client";
 import { ThemeProvider } from "next-themes";
+import { getSession } from "auth";
+import { PublicLayout } from "~/components/layouts/PublicLayout";
+import { ProtectedLayout } from "~/components/layouts/ProtectedLayout";
 
 import "./tailwind.css";
 
@@ -25,6 +30,20 @@ export const links: LinksFunction = () => [
 		href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
 	},
 ];
+
+export async function loader({ request }: LoaderFunctionArgs) {
+	const requestHeaders = request.headers;
+	
+	let sessionResult = null;
+	try {
+		sessionResult = await getSession({ headers: requestHeaders }); 
+	} catch (error) {
+		sessionResult = null; 
+	}
+
+	const user = sessionResult?.user ?? null;
+	return json({ user });
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
 	const { queryClient, trpcClient } = useTrpcClient();
@@ -53,5 +72,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	return <Outlet />;
+	const { user } = useLoaderData<typeof loader>();
+
+	if (user) {
+		return (
+			<ProtectedLayout>
+				<Outlet />
+			</ProtectedLayout>
+		);
+	}
+
+	return (
+		<PublicLayout>
+			<Outlet />
+		</PublicLayout>
+	);
 }

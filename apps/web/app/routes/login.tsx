@@ -1,5 +1,5 @@
 import { type FormEvent, useState } from "react";
-import { Link, useNavigate } from "@remix-run/react";
+import { Link, useNavigate, useRevalidator } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
@@ -15,11 +15,13 @@ import { trpc } from "~/lib/trpc/client";
 
 export default function Login() {
   const navigate = useNavigate();
+  const revalidator = useRevalidator();
   const [error, setError] = useState<string | null>(null);
 
   const loginMutation = trpc.auth.login.useMutation({
     onSuccess: () => {
       navigate("/");
+      revalidator.revalidate();
     },
     onError: (error) => {
       setError(error.message);

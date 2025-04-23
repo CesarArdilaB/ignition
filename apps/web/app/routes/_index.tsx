@@ -1,11 +1,7 @@
-import { Link, useLoaderData } from "@remix-run/react";
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import { Link, useRouteLoaderData } from "@remix-run/react";
+import type { MetaFunction } from "@remix-run/node";
 import { Button } from "~/components/ui/button";
-import { auth } from "auth";
-import { PublicLayout } from "../components/layouts/PublicLayout";
-import { ProtectedLayout } from "../components/layouts/ProtectedLayout";
 import { APP_DESCRIPTION, APP_NAME } from "~/lib/constants";
-import { jsonResponse } from "~/lib/utils";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -16,14 +12,6 @@ export const meta: MetaFunction = () => {
 		},
 	];
 };
-
-export async function loader({ request }: LoaderFunctionArgs) {
-	const session = await auth.api.getSession({
-		headers: request.headers,
-	});
-
-	return jsonResponse({ user: session?.user ?? null });
-}
 
 function LandingPageContent() {
 	return (
@@ -53,19 +41,12 @@ function LoggedInIndexContent() {
 }
 
 export default function Index() {
-	const { user } = useLoaderData<typeof loader>();
+	const rootData = useRouteLoaderData("root") as { user: { id: string } | null } | undefined;
+	const user = rootData?.user;
 
 	if (user) {
-		return (
-			<ProtectedLayout>
-				<LoggedInIndexContent />
-			</ProtectedLayout>
-		);
+		return <LoggedInIndexContent />;
 	}
 
-	return (
-		<PublicLayout>
-			<LandingPageContent />
-		</PublicLayout>
-	);
+	return <LandingPageContent />;
 }

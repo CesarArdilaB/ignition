@@ -11,6 +11,7 @@ interface GetSessionResult {
 
 export interface Context {
   req: Request; // Include the full request object
+  resHeaders: Headers; // Add response headers object
   // Store the result of getSession, which might be null
   sessionResult: GetSessionResult | null;
 }
@@ -20,6 +21,7 @@ export async function createContext(opts: FetchCreateContextFnOptions): Promise<
   const sessionResult = await getSession({ headers: opts.req.headers });
   return {
     req: opts.req,
+    resHeaders: opts.resHeaders, // Pass response headers from options
     sessionResult, // Store the full result
   };
 }
