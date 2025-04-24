@@ -13,7 +13,7 @@ export const meta: MetaFunction = () => {
 	];
 };
 
-function LandingPageContent() {
+function HomePageContent() {
 	return (
 		<div className="container mx-auto py-12">
 			<div className="text-center mb-12">
@@ -48,5 +48,5 @@ export default function Index() {
 		return <LoggedInIndexContent />;
 	}
 
-	return <LandingPageContent />;
+	return <HomePageContent />;
 }
