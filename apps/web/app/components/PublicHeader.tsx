@@ -10,7 +10,7 @@ export function PublicHeader() {
 			<div className="flex h-16 items-center justify-between px-8">
 				<div className="flex items-center gap-6 md:gap-10">
 					<Link to="/" className="flex items-center space-x-2">
-						<NameAndLogo />
+						<NameAndLogo open={true} />
 					</Link>
 					<nav className="hidden md:flex items-center gap-6 text-sm">
 						{/* TODO: Add navigation links here */}
