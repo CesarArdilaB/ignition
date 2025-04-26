@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import { ThemeToggle } from '../ThemeToggle';
 
 interface ProtectedLayoutProps {
   children: React.ReactNode;
@@ -63,11 +64,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
           
           {/* Right section with search and user menu */}
           <div className="flex items-center gap-2 justify-end">
-            {/* Search button */}
-            <Button variant="ghost" size="icon" className="h-9 w-9">
-              <Search className="h-4 w-4" />
-              <span className="sr-only">Search</span>
-            </Button>
+            <ThemeToggle />
             
             {/* Notifications */}
             <Button variant="ghost" size="icon" className="h-9 w-9 relative">

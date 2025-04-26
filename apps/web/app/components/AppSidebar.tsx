@@ -32,30 +32,30 @@ import { NameAndLogo } from "./NameAndLogo";
 // Main navigation items
 const mainNavItems = [
 	{
-		title: "Dashboard",
+		title: "Home",
 		url: "/",
 		icon: LayoutDashboard,
 	},
 	{
-		title: "Inbox",
-		url: "/inbox",
+		title: "Menu 1",
+		url: "/",
 		icon: Inbox,
 		badge: "12",
 	},
 	{
-		title: "Calendar",
-		url: "/calendar",
+		title: "Menu 2",
+		url: "/",
 		icon: Calendar,
 	},
 	{
-		title: "Analytics",
-		url: "/analytics",
+		title: "Menu 3",
+		url: "/",
 		icon: BarChart,
 	},
 ];
 
 // Resources menu items
-const resourceItems = [
+const otherItems = [
 	{
 		title: "Documentation",
 		url: "/docs",
@@ -73,19 +73,6 @@ const resourceItems = [
 	},
 ];
 
-// Settings menu items
-const settingsItems = [
-	{
-		title: "Settings",
-		url: "/settings",
-		icon: Settings,
-	},
-	{
-		title: "Notifications",
-		url: "/notifications",
-		icon: Bell,
-	},
-];
 
 export function AppSidebar() {
 	const { open } = useSidebar();
@@ -129,37 +116,12 @@ export function AppSidebar() {
 				<SidebarGroup>
 					{open && (
 						<SidebarGroupLabel className="px-3 pt-2">
-							Resources
+							Other
 						</SidebarGroupLabel>
 					)}
 					<SidebarGroupContent>
 						<SidebarMenu>
-							{resourceItems.map((item) => (
-								<SidebarMenuItem key={item.title}>
-									<SidebarMenuButton asChild>
-										<Link to={item.url}>
-											<item.icon className="h-4 w-4" />
-											<span>{open && item.title}</span>
-										</Link>
-									</SidebarMenuButton>
-								</SidebarMenuItem>
-							))}
-						</SidebarMenu>
-					</SidebarGroupContent>
-				</SidebarGroup>
-
-				<SidebarSeparator />
-
-				{/* Settings Section */}
-				<SidebarGroup>
-					{open && (
-						<SidebarGroupLabel className="px-3 pt-2">
-							Settings
-						</SidebarGroupLabel>
-					)}
-					<SidebarGroupContent>
-						<SidebarMenu>
-							{settingsItems.map((item) => (
+							{otherItems.map((item) => (
 								<SidebarMenuItem key={item.title}>
 									<SidebarMenuButton asChild>
 										<Link to={item.url}>
