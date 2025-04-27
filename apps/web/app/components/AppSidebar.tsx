@@ -18,10 +18,9 @@ import {
 	FileText,
 	Calendar,
 	LayoutDashboard,
-	LineChart,
-	Users,
 	BarChart,
 	Inbox,
+	SparklesIcon,
 } from "lucide-react";
 import React from "react";
 import { NameAndLogo } from "./NameAndLogo";
@@ -59,15 +58,10 @@ const otherItems = [
 		icon: FileText,
 	},
 	{
-		title: "Reports",
-		url: "/reports",
-		icon: LineChart,
-	},
-	{
-		title: "Team",
-		url: "/team",
-		icon: Users,
-	},
+		title: "AI Example",
+		url: "/example/ai",
+		icon: SparklesIcon,
+	}
 ];
 
 
