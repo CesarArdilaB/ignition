@@ -15,9 +15,7 @@ export const db = drizzle(sqlite, {
 
 // Export tables
 export const tables = {
-  categories: schema.categories,
-  products: schema.products,
-  variants: schema.variants,
+  example: schema.example,
 } as const;
 
 // Ensure the database is properly closed when the app exits

@@ -6,7 +6,7 @@ export { PostgresAdapter } from './adapters/postgres';
 export type { DatabaseAdapter, DatabaseConfig } from './adapters/types';
 
 // Schema
-export * from './schema/catalog';
+export * from './schema/example';
 
 // Factory function to create a database instance
 export function createDatabase(adapter: DatabaseAdapter): DatabaseAdapter {

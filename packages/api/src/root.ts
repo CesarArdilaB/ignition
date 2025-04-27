@@ -1,10 +1,10 @@
 import { router } from './trpc';
-import { catalogRouter } from './routes/catalog';
+import { exampleRouter } from './routes/example';
 import { aiRouter } from './routes/ai';
 import { authRouter } from './routes/auth';
 
 export const appRouter = router({
-  catalog: catalogRouter,
+  catalog: exampleRouter,
   ai: aiRouter,
   auth: authRouter,
 });

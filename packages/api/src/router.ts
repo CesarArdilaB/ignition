@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { router, publicProcedure } from './trpc';
-import { catalogRouter } from './routes/catalog';
+import { exampleRouter } from './routes/example';
 
 export const appRouter = router({
   hello: publicProcedure
@@ -18,7 +18,7 @@ export const appRouter = router({
       };
     }),
 
-  catalog: catalogRouter,
+  catalog: exampleRouter,
 });
 
 export type AppRouter = typeof appRouter; 
