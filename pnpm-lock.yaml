@@ -289,7 +289,10 @@ importers:
         version: 16.4.7
       drizzle-orm:
         specifier: 0.41.0
-        version: 0.41.0(@libsql/client@0.10.0)(@types/better-sqlite3@7.6.12)(@types/pg@8.11.11)(better-sqlite3@11.9.1)(gel@2.0.1)(kysely@0.27.6)(pg@8.14.1)(postgres@3.4.5)(sqlite3@5.1.7)
+        version: 0.41.0(@libsql/client@0.10.0)(@types/better-sqlite3@7.6.12)(@types/pg@8.11.14)(better-sqlite3@11.9.1)(gel@2.0.1)(kysely@0.27.6)(pg@8.14.1)(postgres@3.4.5)(sqlite3@5.1.7)
+      pg:
+        specifier: ^8.11.3
+        version: 8.14.1
       zod:
         specifier: ^3.22.4
         version: 3.24.2
@@ -297,6 +300,9 @@ importers:
       '@types/better-sqlite3':
         specifier: ^7.6.9
         version: 7.6.12
+      '@types/pg':
+        specifier: ^8.11.14
+        version: 8.11.14
       '@vitest/ui':
         specifier: ^3.0.9
         version: 3.0.9(vitest@3.0.9)
@@ -2010,6 +2016,9 @@ packages:
 
   '@types/pg@8.11.11':
     resolution: {integrity: sha512-kGT1qKM8wJQ5qlawUrEkXgvMSXoV213KfMGXcwfDwUIfUHXqXYXOfS1nE1LINRJVVVx5wCm70XnFlMHaIcQAfw==}
+
+  '@types/pg@8.11.14':
+    resolution: {integrity: sha512-qyD11E5R3u0eJmd1lB0WnWKXJGA7s015nyARWljfz5DcX83TKAIlY+QrmvzQTsbIe+hkiFtkyL2gHC6qwF6Fbg==}
 
   '@types/prop-types@15.7.14':
     resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
@@ -7046,6 +7055,12 @@ snapshots:
       pg-protocol: 1.8.0
       pg-types: 4.0.2
 
+  '@types/pg@8.11.14':
+    dependencies:
+      '@types/node': 22.13.13
+      pg-protocol: 1.8.0
+      pg-types: 4.0.2
+
   '@types/prop-types@15.7.14': {}
 
   '@types/react-dom@18.3.5(@types/react@18.3.18)':
@@ -7814,6 +7829,18 @@ snapshots:
       '@libsql/client': 0.10.0
       '@types/better-sqlite3': 7.6.12
       '@types/pg': 8.11.11
+      better-sqlite3: 11.9.1
+      gel: 2.0.1
+      kysely: 0.27.6
+      pg: 8.14.1
+      postgres: 3.4.5
+      sqlite3: 5.1.7
+
+  drizzle-orm@0.41.0(@libsql/client@0.10.0)(@types/better-sqlite3@7.6.12)(@types/pg@8.11.14)(better-sqlite3@11.9.1)(gel@2.0.1)(kysely@0.27.6)(pg@8.14.1)(postgres@3.4.5)(sqlite3@5.1.7):
+    optionalDependencies:
+      '@libsql/client': 0.10.0
+      '@types/better-sqlite3': 7.6.12
+      '@types/pg': 8.11.14
       better-sqlite3: 11.9.1
       gel: 2.0.1
       kysely: 0.27.6

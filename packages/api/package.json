@@ -21,13 +21,15 @@
     "database": "workspace:*",
     "dotenv": "^16.4.5",
     "drizzle-orm": "0.41.0",
+    "pg": "^8.11.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "tsx": "^4.7.1",
     "@types/better-sqlite3": "^7.6.9",
+    "@types/pg": "^8.11.14",
+    "@vitest/ui": "^3.0.9",
+    "tsx": "^4.7.1",
     "typescript": "^5.4.2",
-    "vitest": "^3.0.9",
-    "@vitest/ui": "^3.0.9"
+    "vitest": "^3.0.9"
   }
 }
