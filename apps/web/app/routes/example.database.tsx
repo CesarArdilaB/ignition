@@ -154,7 +154,7 @@ export default function ExampleDatabase() {
             </tr>
           </thead>
           <tbody>
-            {examples?.map((example: ApiExample) => (
+            {(examples as ApiExample[] | undefined)?.map((example) => (
               <tr key={example.id}>
                 <td className={tableCellStyle}>{example.id}</td>
                 <td className={tableCellStyle}>{example.name}</td>
