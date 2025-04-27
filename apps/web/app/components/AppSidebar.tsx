@@ -14,16 +14,13 @@ import {
 	useSidebar,
 } from "~/components/ui/sidebar";
 import {
-	Settings,
 	User,
 	FileText,
 	Calendar,
 	LayoutDashboard,
-	Mail,
 	LineChart,
 	Users,
 	BarChart,
-	Bell,
 	Inbox,
 } from "lucide-react";
 import React from "react";
@@ -57,8 +54,8 @@ const mainNavItems = [
 // Resources menu items
 const otherItems = [
 	{
-		title: "Documentation",
-		url: "/docs",
+		title: "Database Example",
+		url: "/example/database",
 		icon: FileText,
 	},
 	{

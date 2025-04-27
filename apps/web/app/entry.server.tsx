@@ -41,12 +41,13 @@ export default function handleRequest(
 
 function handleBotRequest(
   request: Request,
-  responseStatusCode: number,
+  initialResponseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
   return new Promise((resolve, reject) => {
     let shellRendered = false;
+    let statusCode = initialResponseStatusCode;
     const { pipe, abort } = renderToPipeableStream(
       <RemixServer
         context={remixContext}
@@ -64,7 +65,7 @@ function handleBotRequest(
           resolve(
             new Response(stream, {
               headers: responseHeaders,
-              status: responseStatusCode,
+              status: statusCode,
             })
           );
 
@@ -74,10 +75,7 @@ function handleBotRequest(
           reject(error);
         },
         onError(error: unknown) {
-          responseStatusCode = 500;
-          // Log streaming rendering errors from inside the shell.  Don't log
-          // errors encountered during initial shell rendering since they'll
-          // reject and get logged in handleDocumentRequest.
+          statusCode = 500;
           if (shellRendered) {
             console.error(error);
           }
@@ -91,12 +89,13 @@ function handleBotRequest(
 
 function handleBrowserRequest(
   request: Request,
-  responseStatusCode: number,
+  initialResponseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
   return new Promise((resolve, reject) => {
     let shellRendered = false;
+    let statusCode = initialResponseStatusCode;
     const { pipe, abort } = renderToPipeableStream(
       <RemixServer
         context={remixContext}
@@ -114,7 +113,7 @@ function handleBrowserRequest(
           resolve(
             new Response(stream, {
               headers: responseHeaders,
-              status: responseStatusCode,
+              status: statusCode,
             })
           );
 
@@ -124,10 +123,7 @@ function handleBrowserRequest(
           reject(error);
         },
         onError(error: unknown) {
-          responseStatusCode = 500;
-          // Log streaming rendering errors from inside the shell.  Don't log
-          // errors encountered during initial shell rendering since they'll
-          // reject and get logged in handleDocumentRequest.
+          statusCode = 500;
           if (shellRendered) {
             console.error(error);
           }
